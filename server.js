@@ -12,3 +12,11 @@ console.log("server running......");
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/index.html");
 });
+
+io.sockets.on("connection", function(socket) {
+  connections.push(socket);
+  console.log("connceted %s sockets conncted", connections.length);
+
+  connections.splice(connections.indexOf(socket), 1);
+  console.log("disconnected %s socket connceted", connections.length);
+});
